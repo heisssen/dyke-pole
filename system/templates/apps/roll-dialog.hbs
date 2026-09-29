@@ -1,0 +1,48 @@
+<div class="ws-roll-form">
+  <div class="form-group">
+    <label>{{localize "WS.Roll.Mode.Label"}}</label>
+    <select name="mode">{{#each modes}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{localize label}}</option>{{/each}}</select>
+  </div>
+
+  <div class="form-group" data-show="task">
+    <label>{{localize "WS.Task.Label"}}</label>
+    <select name="task">{{#each tasks}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{localize label}}</option>{{/each}}</select>
+  </div>
+
+  <div class="form-group">
+    <label>{{#if isCamp}}{{localize "WS.Sheet.Rating"}}{{else}}{{localize "WS.Roll.Base"}}{{/if}}</label>
+    <select name="base">
+      {{#each bases}}<option value="{{value}}" {{#if (eq value ../key)}}selected{{/if}}>{{label}}</option>{{/each}}
+    </select>
+  </div>
+
+  <fieldset data-show="action reaction rating task">
+    <legend>{{localize "WS.Roll.Advantages"}} <small>({{localize "WS.Roll.Max"}} {{maxAdv}})</small></legend>
+    {{#each sources}}
+    <label class="checkbox"><input type="checkbox" name="src.{{id}}"> {{label}}{{#if use}} <em class="use">({{localize "WS.Aspect.Use"}})</em>{{/if}}</label>
+    {{/each}}
+    <div class="form-group">
+      <label>{{localize "WS.Roll.Circumstances"}}</label>
+      <input type="number" name="advantages" value="0" min="0" max="{{maxAdv}}">
+    </div>
+  </fieldset>
+
+  <div class="form-group" data-show="action reaction rating task">
+    <label>{{localize "WS.Roll.Cuts"}}</label>
+    <input type="number" name="cuts" value="0" min="0" max="3">
+    <p class="hint">{{localize "WS.Roll.CutsHint"}}</p>
+  </div>
+
+  <div class="form-group" data-show="action rating">
+    <label>{{localize "WS.Roll.Impact"}}</label>
+    <select name="impact">{{#each impacts}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{localize label}}</option>{{/each}}</select>
+  </div>
+
+  <div class="form-group" data-show="action rating">
+    <label>{{localize "WS.Roll.Target"}}</label>
+    <select name="target"><option value="">—</option>{{#each targets}}<option value="{{value}}">{{label}}</option>{{/each}}</select>
+  </div>
+
+  <p class="hint" data-show="luck">{{localize "WS.Roll.LuckHint"}}</p>
+  <p class="hint" data-show="control">{{localize "WS.Roll.ControlHint"}}</p>
+</div>

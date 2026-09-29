@@ -1,0 +1,71 @@
+<section class="tab ws-tab {{tab.cssClass}}" data-tab="main" data-group="primary">
+  <div class="ws-columns">
+    <div class="ws-col">
+      <h2 class="ws-h">{{localize "WS.Sheet.Skills"}}</h2>
+      <ul class="ws-stats">
+        {{#each skills}}
+        <li data-tooltip="{{hint}}">
+          <a class="roll" data-action="roll" data-mode="action" data-key="skill.{{key}}"><i class="fa-solid fa-dice-d6"></i></a>
+          <span class="label">{{label}}</span>
+          {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.skills." key) cls="stat"}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="ws-col">
+      <h2 class="ws-h">{{localize "WS.Sheet.Knowledges"}}</h2>
+      <ul class="ws-stats">
+        {{#each knowledges}}
+        <li data-tooltip="{{hint}}">
+          <a class="roll" data-action="roll" data-mode="action" data-key="knowledge.{{key}}"><i class="fa-solid fa-dice-d6"></i></a>
+          <span class="label">{{label}}</span>
+          {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.knowledges." key) cls="stat"}}
+        </li>
+        {{/each}}
+      </ul>
+
+      <h2 class="ws-h">{{localize "WS.Sheet.Counters"}}</h2>
+      {{#each counters}}
+      <div class="ws-counter {{key}}">
+        <div class="top"><span class="label">{{label}}</span>
+          <span class="lvl">{{localize "WS.Counter.Level"}} {{level}}/{{max}}</span>
+          <a data-action="counterMark" data-power="{{key}}" data-tooltip="{{localize 'WS.Counter.AddMark'}}"><i class="fa-solid fa-plus"></i></a></div>
+        <div class="rows">
+          {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=levels path=(concat "system.counters." key ".level") cls="level"}}
+          <span class="sep">·</span>
+          {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=track path=(concat "system.counters." key ".track") cls="track" action="counterPip"}}
+        </div>
+      </div>
+      {{/each}}
+      <a class="ws-link" data-action="roll" data-mode="control"><i class="fa-solid fa-gem"></i> {{localize "WS.Roll.Mode.control"}}</a>
+    </div>
+  </div>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.Drives"}}
+    {{#if canDrive}}<a data-action="addRow" data-path="system.drives" data-max="3" data-row='{"text":"","satisfied":0,"closed":false}'><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+  <ul class="ws-rows" data-list="system.drives">
+    {{#each drives}}
+    <li data-index="{{i}}" class="{{#if closed}}closed{{/if}}">
+      <i class="fa-solid fa-star bullet"></i>
+      <input type="text" name="system.drives.{{i}}.text" value="{{text}}" placeholder="{{localize 'WS.Drive.Placeholder'}}">
+      <a data-action="driveSatisfy" data-tooltip="{{localize 'WS.Drive.SatisfyTip'}}"><i class="fa-solid fa-check"></i>{{#if satisfied}} {{satisfied}}{{/if}}</a>
+      <label class="checkbox" data-tooltip="{{localize 'WS.Drive.CloseTip'}}"><input type="checkbox" name="system.drives.{{i}}.closed" {{checked closed}}> {{localize "WS.Drive.Closed"}}</label>
+      <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+    </li>
+    {{else}}<li class="empty">{{localize "WS.Drive.None"}}</li>{{/each}}
+  </ul>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.Bonds"}}
+    {{#if canBond}}<a data-action="addRow" data-path="system.bonds" data-max="3" data-row='{"name":"","uuid":"","marks":1}'><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+  <ul class="ws-rows" data-list="system.bonds">
+    {{#each bonds}}
+    <li data-index="{{i}}">
+      <i class="fa-solid fa-link bullet"></i>
+      <input type="text" name="system.bonds.{{i}}.name" value="{{name}}" placeholder="{{localize 'WS.Bond.Placeholder'}}">
+      {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.bonds." i ".marks") cls="bond"}}
+      <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+    </li>
+    {{else}}<li class="empty">{{localize "WS.Bond.None"}}</li>{{/each}}
+  </ul>
+  <p class="ws-note">{{localize "WS.Bond.Rule"}}</p>
+</section>

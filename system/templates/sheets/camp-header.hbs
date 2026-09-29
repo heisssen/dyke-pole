@@ -1,0 +1,15 @@
+<header class="ws-head camp">
+  <img class="portrait" src="{{actor.img}}" data-action="editImage" data-edit="img" alt="">
+  <div class="ws-head-main">
+    <input class="ws-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'WS.Camp.Name'}}">
+    <div class="ws-identity">
+      <label><span>{{localize "WS.Camp.Kind"}}</span><input type="text" name="system.kind" value="{{system.kind}}" placeholder="{{localize 'WS.Camp.KindHint'}}"></label>
+      <label class="wide"><span>{{localize "WS.Camp.Drive"}}</span><input type="text" name="system.drive" value="{{system.drive}}"></label>
+    </div>
+  </div>
+  <div class="ws-head-rolls">
+    {{#if isActive}}<span class="active"><i class="fa-solid fa-fire"></i> {{localize "WS.Camp.Active"}}</span>
+    {{else}}{{#if isGM}}<button type="button" data-action="activate"><i class="fa-solid fa-fire"></i> {{localize "WS.Camp.MakeActive"}}</button>{{/if}}{{/if}}
+    <button type="button" data-action="roll" data-mode="rating"><i class="fa-solid fa-dice"></i> {{localize "WS.Roll.Mode.rating"}}</button>
+  </div>
+</header>

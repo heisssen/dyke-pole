@@ -1,0 +1,35 @@
+<section class="tab ws-tab {{tab.cssClass}}" data-tab="aspects" data-group="primary">
+  <h2 class="ws-h">{{localize "WS.Sheet.Aspects"}}
+    {{#if editable}}<a data-action="createItem" data-type="aspect" data-kind="permanent"><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+  <div class="ws-aspects">
+    {{#each aspects}}
+    <article class="ws-aspect {{#if broken}}broken{{/if}}" data-item-id="{{id}}" data-drag-item>
+      <header>
+        <a class="name" data-action="editItem">{{name}}</a>
+        {{#if controlledBy}}<span class="faction" data-tooltip="{{localize 'WS.Aspect.ControlledBy'}}">{{controlledBy}}</span>{{/if}}
+        <span class="ctl"><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span>
+      </header>
+      <div class="track">{{#each pips}}<a class="pip dmg {{#if on}}on{{/if}}" data-action="itemPip" data-n="{{n}}"></a>{{/each}}</div>
+      <ul class="abilities">{{#each abilities}}<li>{{#if advantage}}<b class="adv">(п)</b> {{/if}}{{text}}{{#if use}} <em class="use">{{localize "WS.Aspect.Use"}}</em>{{/if}}</li>{{/each}}</ul>
+    </article>
+    {{else}}<p class="empty">{{localize "WS.Aspect.None"}}</p>{{/each}}
+  </div>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.TempAspects"}}
+    {{#if editable}}<a data-action="createItem" data-type="aspect" data-kind="boon" data-tooltip="{{localize 'WS.New.boon'}}"><i class="fa-solid fa-sun"></i></a>
+    <a data-action="createItem" data-type="aspect" data-kind="harm" data-tooltip="{{localize 'WS.New.harm'}}"><i class="fa-solid fa-droplet"></i></a>{{/if}}</h2>
+  <div class="ws-aspects temp">
+    {{#each temps}}
+    <article class="ws-aspect {{kind}} {{#if broken}}broken{{/if}}" data-item-id="{{id}}" data-drag-item>
+      <header>
+        <span class="kind">{{localize (concat "WS.Aspect.Kind." kind)}}</span>
+        <a class="name" data-action="editItem">{{name}}</a>
+        <span class="ctl"><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span>
+      </header>
+      <div class="track">{{#each pips}}<a class="pip dmg {{#if on}}on{{/if}}" data-action="itemPip" data-n="{{n}}"></a>{{/each}}</div>
+      <ul class="abilities">{{#each abilities}}<li>{{#if advantage}}<b class="adv">(п)</b> {{/if}}{{text}}{{#if use}} <em class="use">{{localize "WS.Aspect.Use"}}</em>{{/if}}</li>{{/each}}</ul>
+    </article>
+    {{else}}<p class="empty">{{localize "WS.Aspect.NoTemp"}}</p>{{/each}}
+  </div>
+  <p class="ws-note">{{localize "WS.Aspect.Rule"}}</p>
+</section>

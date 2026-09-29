@@ -1,0 +1,51 @@
+<section class="tab ws-tab {{tab.cssClass}}" data-tab="main" data-group="primary">
+  <div class="ws-columns">
+    <div class="ws-col">
+      <h2 class="ws-h">{{localize "WS.Camp.Ratings"}}</h2>
+      <ul class="ws-stats ratings">
+        {{#each ratings}}
+        <li data-tooltip="{{hint}}" class="{{#if zero}}zero{{/if}}">
+          <a class="roll" data-action="roll" data-mode="rating" data-key="rating.{{key}}"><i class="fa-solid fa-dice-d6"></i></a>
+          <span class="label">{{label}}</span>
+          {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.ratings." key) cls="stat"}}
+        </li>
+        {{/each}}
+      </ul>
+      <p class="ws-note">{{localize "WS.Camp.RatingRule"}}</p>
+    </div>
+    <div class="ws-col">
+      <h2 class="ws-h">{{localize "WS.Camp.Danger"}} <span class="count">{{system.danger}}/10</span></h2>
+      <div class="ws-danger">{{#each danger}}<a class="pip {{#if on}}on{{/if}} {{#if critical}}critical{{/if}}" data-action="dangerPip" data-n="{{n}}"></a>{{/each}}</div>
+      <p class="ws-note">{{localize "WS.Camp.DangerRule"}}</p>
+
+      <h2 class="ws-h">{{localize "WS.Camp.Cargo"}} <span class="count {{#if (gt cargo.length cargoLimit)}}over{{/if}}">{{cargo.length}}/{{cargoLimit}}</span>
+        <a data-action="addRow" data-path="system.cargo" data-row='{"name":"","tags":""}'><i class="fa-solid fa-plus"></i></a></h2>
+      <ul class="ws-rows" data-list="system.cargo">
+        {{#each cargo}}
+        <li data-index="{{i}}"><i class="fa-solid fa-box bullet"></i>
+          <input type="text" name="system.cargo.{{i}}.name" value="{{name}}" placeholder="{{localize 'WS.Camp.CargoName'}}">
+          <input type="text" class="tags" name="system.cargo.{{i}}.tags" value="{{tags}}" placeholder="{{localize 'WS.Camp.CargoTags'}}">
+          <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a></li>
+        {{else}}<li class="empty">—</li>{{/each}}
+      </ul>
+      <p class="ws-note">{{localize "WS.Camp.CargoRule"}}</p>
+    </div>
+  </div>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.Projects"}}
+    {{#if canProject}}<a data-action="addRow" data-path="system.projects" data-max="3" data-row='{"name":"","kind":"custom","target":"","value":0,"max":3,"notes":""}'><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+  <ul class="ws-projects" data-list="system.projects">
+    {{#each projects}}
+    <li data-index="{{i}}">
+      <div class="row1">
+        <input type="text" name="system.projects.{{i}}.name" value="{{name}}" placeholder="{{localize 'WS.Project.New'}}">
+        <select name="system.projects.{{i}}.kind">{{#each ../projectKinds}}<option value="{{value}}" {{#if (eq value ../kind)}}selected{{/if}}>{{localize label}}</option>{{/each}}</select>
+        <input type="number" class="len" name="system.projects.{{i}}.max" value="{{max}}" min="1" max="12">
+        <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+      </div>
+      {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.projects." i ".value") cls="project"}}
+    </li>
+    {{else}}<li class="empty">{{localize "WS.Project.None"}}</li>{{/each}}
+  </ul>
+  <p class="ws-note">{{localize "WS.Camp.ProjectRule"}}</p>
+</section>

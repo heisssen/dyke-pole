@@ -1,0 +1,33 @@
+<div class="ws-scroll">
+  {{#if camp}}
+  <section class="ws-panel-camp">
+    <header><a data-action="openCamp"><img src="{{camp.img}}" alt=""> {{camp.name}}</a></header>
+    <div class="label">{{localize "WS.Camp.Danger"}} <span class="count {{#if critical}}over{{/if}}">{{dangerValue}}/10</span></div>
+    <div class="ws-danger">{{#each danger}}<a class="pip {{#if on}}on{{/if}} {{#if critical}}critical{{/if}}" data-action="danger" data-n="{{n}}"></a>{{/each}}</div>
+    <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "WS.Rest.Button"}}</button>
+  </section>
+  {{else}}<p class="ws-note">{{localize "WS.Tracks.NoCamp"}}</p>{{/if}}
+
+  <h2 class="ws-h">{{localize "WS.Journey.Title"}} <a data-action="journey" data-tooltip="{{localize 'WS.Journey.New'}}"><i class="fa-solid fa-plus"></i></a></h2>
+  {{#each journeys}}
+  <article class="ws-track journey {{#if done}}done{{/if}}" data-id="{{id}}">
+    <header><span class="name">{{name}}</span>
+      <span class="ctl"><a data-action="edit"><i class="fa-solid fa-pen"></i></a><a data-action="remove"><i class="fa-solid fa-trash"></i></a></span></header>
+    <ol class="periods">
+      {{#each phrases}}<li class="{{#if passed}}passed{{/if}}"><span class="pip {{#if passed}}on{{/if}}"></span><span class="phrase">{{#if text}}«{{text}}»{{else}}{{#if passed}}—{{/if}}{{/if}}</span></li>{{/each}}
+    </ol>
+    {{#unless done}}<button type="button" data-action="period"><i class="fa-solid fa-flag"></i> {{localize "WS.Journey.EndPeriod"}}</button>
+    {{else}}<p class="final"><i class="fa-solid fa-location-dot"></i> {{localize "WS.Journey.Final"}}</p>{{/unless}}
+  </article>
+  {{else}}<p class="empty">{{localize "WS.Journey.None"}}</p>{{/each}}
+
+  <h2 class="ws-h">{{localize "WS.Tracks.Other"}} <a data-action="add" data-tooltip="{{localize 'WS.Tracks.Add'}}"><i class="fa-solid fa-plus"></i></a></h2>
+  {{#each others}}
+  <article class="ws-track {{kind}} {{#if secret}}secret{{/if}} {{#if done}}done{{/if}}" data-id="{{id}}">
+    <header><span class="name">{{#if secret}}<i class="fa-solid fa-eye-slash"></i> {{/if}}{{name}}</span>
+      <span class="count">{{value}}/{{max}}</span>
+      <span class="ctl"><a data-action="edit"><i class="fa-solid fa-pen"></i></a><a data-action="remove"><i class="fa-solid fa-trash"></i></a></span></header>
+    <div class="ws-pips">{{#each pips}}<a class="pip {{#if on}}on{{/if}}" data-action="pip" data-n="{{n}}"></a>{{/each}}</div>
+  </article>
+  {{else}}<p class="empty">{{localize "WS.Tracks.None"}}</p>{{/each}}
+</div>

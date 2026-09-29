@@ -1,0 +1,18 @@
+<section class="tab ws-tab {{tab.cssClass}}" data-tab="resources" data-group="primary">
+  {{#each resourceGroups}}
+  <h2 class="ws-h">{{label}} <span class="count {{#if over}}over{{/if}}">{{count}}/{{limit}}</span>
+    {{#if ../editable}}<a data-action="createItem" data-type="resource" data-kind="{{kind}}"><i class="fa-solid fa-plus"></i></a>
+    {{#if alt}}<a data-action="createItem" data-type="resource" data-kind="{{alt}}" data-tooltip="{{localize 'WS.Resource.ruinShard'}}"><i class="fa-solid fa-skull"></i></a>{{/if}}{{/if}}</h2>
+  <ul class="ws-items">
+    {{#each items}}
+    <li class="ws-res {{kind}}" data-item-id="{{id}}" data-drag-item>
+      <img src="{{img}}" alt="">
+      <a class="name" data-action="editItem">{{name}}</a>
+      <span class="tags">{{#each tags}}<span class="tag {{#unless good}}bad{{/unless}}">{{text}}</span>{{/each}}</span>
+      <span class="ctl"><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span>
+    </li>
+    {{else}}<li class="empty">—</li>{{/each}}
+  </ul>
+  {{/each}}
+  <p class="ws-note">{{localize "WS.Resource.Rule"}}</p>
+</section>

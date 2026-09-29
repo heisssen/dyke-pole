@@ -1,0 +1,35 @@
+<div class="ws-scroll">
+  <header class="ws-head item">
+    <img class="portrait small" src="{{item.img}}" data-action="editImage" data-edit="img" alt="">
+    <div class="ws-head-main">
+      <input class="ws-name" type="text" name="name" value="{{item.name}}">
+      <div class="ws-identity">
+        <label><span>{{localize "WS.Aspect.KindLabel"}}</span>
+          <select name="system.kind">
+            <option value="permanent" {{#if (eq system.kind "permanent")}}selected{{/if}}>{{localize "WS.Aspect.Kind.permanent"}}</option>
+            <option value="boon" {{#if (eq system.kind "boon")}}selected{{/if}}>{{localize "WS.Aspect.Kind.boon"}}</option>
+            <option value="harm" {{#if (eq system.kind "harm")}}selected{{/if}}>{{localize "WS.Aspect.Kind.harm"}}</option>
+          </select></label>
+        <label><span>{{localize "WS.Aspect.Length"}}</span><input type="number" name="system.length" value="{{system.length}}" min="1" max="{{system.maxLength}}"></label>
+        <label><span>{{localize "WS.Aspect.ControlledBy"}}</span><input type="text" name="system.controlledBy" value="{{system.controlledBy}}"></label>
+      </div>
+    </div>
+  </header>
+  <div class="track big">{{#each pips}}<a class="pip dmg {{#if on}}on{{/if}}" data-action="pip" data-n="{{n}}"></a>{{/each}}</div>
+
+  <h2 class="ws-h">{{localize "WS.Aspect.Abilities"}}
+    <a data-action="addRow" data-path="system.abilities" data-row='{"text":"","advantage":false,"use":false}'><i class="fa-solid fa-plus"></i></a></h2>
+  <ul class="ws-rows abilities-edit" data-list="system.abilities">
+    {{#each system.abilities}}
+    <li data-index="{{@index}}">
+      <label class="checkbox" data-tooltip="{{localize 'WS.Aspect.AdvantageTip'}}"><input type="checkbox" name="system.abilities.{{@index}}.advantage" {{checked advantage}}>(п)</label>
+      <input type="text" name="system.abilities.{{@index}}.text" value="{{text}}">
+      <label class="checkbox" data-tooltip="{{localize 'WS.Aspect.UseTip'}}"><input type="checkbox" name="system.abilities.{{@index}}.use" {{checked use}}>{{localize "WS.Aspect.Use"}}</label>
+      <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+    </li>
+    {{/each}}
+  </ul>
+  <p class="ws-note">{{localize "WS.Aspect.CostRule"}}</p>
+  <h2 class="ws-h">{{localize "WS.Description"}}</h2>
+  <prose-mirror name="system.description" value="{{system.description}}" toggled="true">{{{descriptionHTML}}}</prose-mirror>
+</div>

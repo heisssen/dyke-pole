@@ -1,0 +1,156 @@
+{
+  "_id": "ckIla795KxTotmDk",
+  "_key": "!journal!ckIla795KxTotmDk",
+  "name": "Дике Поле: коротко про правила",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14",
+    "systemId": "dyke-pole",
+    "systemVersion": "0.1.0",
+    "createdTime": 0,
+    "modifiedTime": 0,
+    "lastModifiedBy": null
+  },
+  "pages": [
+    {
+      "_id": "0Ltl9xdWLRANCWnG",
+      "_key": "!journal.pages!ckIla795KxTotmDk.0Ltl9xdWLRANCWnG",
+      "name": "Кидок дії",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "text": {
+        "format": 1,
+        "content": "\n<p>Збір: <strong>навичка чи знання (до 3к6) + переваги (до 3к6)</strong>. Результат — найвища кістка після зрізів.</p>\n<table><thead><tr><th>Кістка</th><th>Результат</th><th>Позначки на трек</th></tr></thead><tbody>\n<tr><td>6</td><td>Тріумф — успіх без наслідків</td><td>2</td></tr>\n<tr><td>4–5</td><td>Конфлікт — успіх із наслідками</td><td>1</td></tr>\n<tr><td>1–3</td><td>Лихо — провал зі значними наслідками</td><td>—</td></tr>\n<tr><td>дубль</td><td>Твіст — новий елемент у сцені</td><td></td></tr></tbody></table>\n<p>Без жодної кістки кидається одна, але Тріумф неможливий. <strong>Зріз</strong> прибирає найвищу кістку до читання результату.\n<strong>Вплив</strong> (низький −1, середній, високий +1, масивний — весь трек) змінює кількість позначок.</p>\n<p style=\"background:#bcd3d6;padding:6px 10px;border-left:3px solid #2c4a50\"><em>У Foundry: кнопка кидка на аркуші або кубик біля навички. Діалог рахує переваги з аспектів (п) і спорядження, зрізи, вплив; картка в чаті ставить позначки на обраний трек одним кліком.</em></p>"
+      },
+      "sort": 100,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14",
+        "systemId": "dyke-pole",
+        "systemVersion": "0.1.0",
+        "createdTime": 0,
+        "modifiedTime": 0,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "Ux1GwQAYNKSRagJI",
+      "_key": "!journal.pages!ckIla795KxTotmDk.Ux1GwQAYNKSRagJI",
+      "name": "Реакції, талан, контроль",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "text": {
+        "format": 1,
+        "content": "\n<p><strong>Реакція</strong> — захист від дії майстра: 6 — уникнення всього, 4–5 — більшості, 1–3 — повні ушкодження; дубль — контратака на 1 позначку.</p>\n<p><strong>Талан</strong> (випадкова подія) — тільки рейтинг навички чи знання, без переваг: навичка задає характер події, результат — обставини.</p>\n<p><strong>Контроль уламка</strong> — кісток стільки, скільки рівень відповідного лічильника.</p>"
+      },
+      "sort": 200,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14",
+        "systemId": "dyke-pole",
+        "systemVersion": "0.1.0",
+        "createdTime": 0,
+        "modifiedTime": 0,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "K96BGNFGWslv1XGF",
+      "_key": "!journal.pages!ckIla795KxTotmDk.K96BGNFGWslv1XGF",
+      "name": "Аспекти й лічильники",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "text": {
+        "format": 1,
+        "content": "\n<p>Аспект: назва, трек (до 8) і здібності. Ушкодження стирають трек; на нулі здібності недоступні, надлишок стає кривдою.\nМаксимум 4 аспекти й 3 тимчасові (користь чи кривда, до 5).</p>\n<p>Лічильники Степу й Руїни: рівень + трек на 3; повний трек підіймає рівень. Максимальний рівень — перетворення на духа Степу чи погань.</p>\n<p style=\"background:#bcd3d6;padding:6px 10px;border-left:3px solid #2c4a50\"><em>У Foundry: клік по кружечку ставить ушкодження; третя позначка лічильника автоматично підіймає рівень і пише картку в чат.</em></p>"
+      },
+      "sort": 300,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14",
+        "systemId": "dyke-pole",
+        "systemVersion": "0.1.0",
+        "createdTime": 0,
+        "modifiedTime": 0,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "yMPcLdC5Tf5rP2w0",
+      "_key": "!journal.pages!ckIla795KxTotmDk.yMPcLdC5Tf5rP2w0",
+      "name": "Табір, подорож, відпочинок",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "text": {
+        "format": 1,
+        "content": "\n<p>Табір: рейтинги згуртованості, захищеності, швидкості й забезпеченості (до 4), вантаж (6), фракції з впливом (8, старт 5), аспекти, проєкти.</p>\n<p>Подорож: мета, формувальні запитання, трек періодів (зазвичай 3) з ключовою фразою в кінці кожного, фінальна локація.</p>\n<p>Відпочинок: лічильник небезпеки (старт 4) +1 за період; на 10 Степ чи Руїна забирає табір. Кожен період подорожі знижує його на 1.</p>\n<p style=\"background:#bcd3d6;padding:6px 10px;border-left:3px solid #2c4a50\"><em>У Foundry: панель «Треки» (кнопка з кружечком ліворуч) — подорожі з фразами, перешкоди, таймери і лічильник небезпеки активного табору.</em></p>"
+      },
+      "sort": 400,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14",
+        "systemId": "dyke-pole",
+        "systemVersion": "0.1.0",
+        "createdTime": 0,
+        "modifiedTime": 0,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "gKqtSzvRWHx3DJsl",
+      "_key": "!journal.pages!ckIla795KxTotmDk.gKqtSzvRWHx3DJsl",
+      "name": "Ліцензія",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "text": {
+        "format": 1,
+        "content": "<p>This work is Told by Wild Words (<a href=\"http://www.wildwords-srd.com/\">wildwords-srd.com</a>). The Wild Words Engine is a product of\nFelix Isaacs, Quillhound Studios and Mythworks, licensed under <a href=\"http://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>.\nTold by Wild Words™ is a trademark of Mythopoeia, Inc.</p>\n<p>«Дике Поле» — сетинг © «КУРА», 2025 (текст: Святослав Демченко, Євген Мокеєв). Ця система — фанатська реалізація механік для Foundry VTT; сетинг, тексти й ілюстрації книги в неї не входять.</p>"
+      },
+      "sort": 500,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14",
+        "systemId": "dyke-pole",
+        "systemVersion": "0.1.0",
+        "createdTime": 0,
+        "modifiedTime": 0,
+        "lastModifiedBy": null
+      }
+    }
+  ]
+}

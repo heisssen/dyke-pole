@@ -1,0 +1,39 @@
+<div class="ws-scroll ws-threat-body">
+  <header class="ws-head threat">
+    <img class="portrait" src="{{actor.img}}" data-action="editImage" data-edit="img" alt="">
+    <div class="ws-head-main">
+      <input class="ws-name" type="text" name="name" value="{{actor.name}}">
+      <div class="ws-identity">
+        <label><span>{{localize "WS.Threat.Kind"}}</span><select name="system.kind">{{#each kinds}}<option value="{{value}}" {{#if (eq value ../system.kind)}}selected{{/if}}>{{localize label}}</option>{{/each}}</select></label>
+        <label><span>{{localize "WS.Threat.Difficulty"}}</span><select name="system.difficulty">{{#each difficulties}}<option value="{{value}}" {{#if (eq value ../system.difficulty)}}selected{{/if}}>{{localize label}}</option>{{/each}}</select></label>
+      </div>
+      <div class="ws-total"><span>{{localize "WS.Threat.Track"}} {{total.value}}/{{total.max}}</span>
+        <span class="ws-pips">{{#each totalPips}}<span class="pip dmg {{#if on}}on{{/if}}"></span>{{/each}}</span></div>
+    </div>
+  </header>
+
+  <label class="ws-field"><span>{{localize "WS.Threat.Drive"}}</span><input type="text" name="system.drive" value="{{system.drive}}"></label>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.Aspects"}}
+    {{#if editable}}<a data-action="createItem" data-type="aspect" data-kind="permanent"><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+  <div class="ws-aspects">
+    {{#each aspects}}
+    <article class="ws-aspect {{#if broken}}broken{{/if}}" data-item-id="{{id}}" data-drag-item>
+      <header><a class="name" data-action="editItem">{{name}}</a>
+        <span class="ctl"><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span></header>
+      <div class="track">{{#each pips}}<a class="pip dmg {{#if on}}on{{/if}}" data-action="itemPip" data-n="{{n}}"></a>{{/each}}</div>
+      <ul class="abilities">{{#each abilities}}<li>{{text}}</li>{{/each}}</ul>
+    </article>
+    {{else}}<p class="empty">{{localize "WS.Threat.NoAspects"}}</p>{{/each}}
+  </div>
+
+  <label class="ws-field"><span>{{localize "WS.Threat.Quirks"}}</span><textarea name="system.quirks" rows="2">{{system.quirks}}</textarea></label>
+  <label class="ws-field"><span>{{localize "WS.Threat.Resources"}}</span><textarea name="system.resources" rows="2">{{system.resources}}</textarea></label>
+  <div class="ws-columns">
+    <label class="ws-field ws-col"><span>{{localize "WS.Threat.Appease"}}</span><textarea name="system.appease" rows="2">{{system.appease}}</textarea></label>
+    <label class="ws-field ws-col"><span>{{localize "WS.Threat.Banish"}}</span><textarea name="system.banish" rows="2">{{system.banish}}</textarea></label>
+  </div>
+  <h2 class="ws-h">{{localize "WS.Tab.Notes"}}</h2>
+  <prose-mirror name="system.notes" value="{{system.notes}}" toggled="true">{{{notesHTML}}}</prose-mirror>
+  <p class="ws-note">{{localize "WS.Threat.Rule"}}</p>
+</div>

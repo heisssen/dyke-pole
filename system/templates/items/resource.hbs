@@ -1,0 +1,31 @@
+<div class="ws-scroll">
+  <header class="ws-head item">
+    <img class="portrait small" src="{{item.img}}" data-action="editImage" data-edit="img" alt="">
+    <div class="ws-head-main">
+      <input class="ws-name" type="text" name="name" value="{{item.name}}">
+      <div class="ws-identity">
+        <label><span>{{localize "WS.Resource.Kind"}}</span>
+          <select name="system.kind">
+            {{#each kinds}}<option value="{{value}}" {{#if (eq value ../system.kind)}}selected{{/if}}>{{localize label}}</option>{{/each}}
+          </select></label>
+        <label><span>{{localize "WS.Resource.Value"}}</span><span class="val">{{value}}</span></label>
+      </div>
+    </div>
+  </header>
+  <h2 class="ws-h">{{localize "WS.Resource.Tags"}}
+    <a data-action="addRow" data-path="system.tags" data-row='{"text":"","good":true}'><i class="fa-solid fa-plus"></i></a></h2>
+  <ul class="ws-rows" data-list="system.tags">
+    {{#each system.tags}}
+    <li data-index="{{@index}}">
+      <input type="text" name="system.tags.{{@index}}.text" value="{{text}}">
+      <label class="checkbox"><input type="checkbox" name="system.tags.{{@index}}.good" {{checked good}}>{{localize "WS.Resource.Good"}}</label>
+      <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+    </li>
+    {{/each}}
+  </ul>
+  {{#if shard}}<p class="ws-note">{{localize "WS.Resource.ShardRule"}}</p>{{/if}}
+  {{#if isMap}}<p class="ws-note">{{localize "WS.Resource.MapRule"}}</p>{{/if}}
+  <h2 class="ws-h">{{localize "WS.Description"}}</h2>
+  <prose-mirror name="system.description" value="{{system.description}}" toggled="true">{{{descriptionHTML}}}</prose-mirror>
+  {{#if shard}}{{#if item.parent}}<button type="button" data-action="useShard"><i class="fa-solid fa-wand-sparkles"></i> {{localize "WS.Resource.UseShard"}}</button>{{/if}}{{/if}}
+</div>

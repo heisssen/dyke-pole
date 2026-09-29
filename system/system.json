@@ -1,0 +1,98 @@
+{
+  "id": "dyke-pole",
+  "title": "Дике Поле",
+  "description": "Система для настільної рольової гри «Дике Поле» (рушій Wild Words) у Foundry VTT v14: аркуші персонажа, табору й загроз, збір кісток зі зрізами, впливом і твістами, спільні треки подорожі та лічильник небезпеки.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "heisssen (система для Foundry)"
+    }
+  ],
+  "esmodules": [
+    "dyke-pole.mjs"
+  ],
+  "styles": [
+    "styles/dyke-pole.css"
+  ],
+  "languages": [
+    {
+      "lang": "uk",
+      "name": "Українська",
+      "path": "lang/uk.json"
+    },
+    {
+      "lang": "en",
+      "name": "Українська (для англомовного інтерфейсу)",
+      "path": "lang/uk.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": [
+          "notes"
+        ]
+      },
+      "camp": {
+        "htmlFields": [
+          "notes"
+        ]
+      },
+      "threat": {
+        "htmlFields": [
+          "notes"
+        ]
+      }
+    },
+    "Item": {
+      "aspect": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "resource": {
+        "htmlFields": [
+          "description"
+        ]
+      }
+    }
+  },
+  "packs": [
+    {
+      "name": "rules",
+      "label": "Правила Wild Words (коротко)",
+      "path": "packs/rules",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Дике Поле",
+      "color": "#6b5a1e",
+      "packs": [
+        "rules"
+      ]
+    }
+  ],
+  "socket": true,
+  "grid": {
+    "type": 0,
+    "distance": 1,
+    "units": ""
+  },
+  "primaryTokenAttribute": null,
+  "license": "LICENSE",
+  "url": "https://github.com/heisssen/dyke-pole",
+  "manifest": "https://github.com/heisssen/dyke-pole/releases/latest/download/system.json",
+  "download": "https://github.com/heisssen/dyke-pole/releases/download/v0.1.0/dyke-pole-0.1.0.zip",
+  "bugs": "https://github.com/heisssen/dyke-pole/issues",
+  "readme": "https://github.com/heisssen/dyke-pole/blob/main/README.md"
+}

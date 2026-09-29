@@ -1,0 +1,21 @@
+<section class="tab ws-tab {{tab.cssClass}}" data-tab="factions" data-group="primary">
+  <h2 class="ws-h">{{localize "WS.Tab.Factions"}}
+    <a data-action="addRow" data-path="system.factions" data-row='{"name":"","drive":"","people":"","resource":"","aspect":"","influence":5}'><i class="fa-solid fa-plus"></i></a></h2>
+  <div class="ws-factions" data-list="system.factions">
+    {{#each factions}}
+    <article class="ws-faction" data-index="{{i}}">
+      <header>
+        <input class="fname" type="text" name="system.factions.{{i}}.name" value="{{name}}" placeholder="{{localize 'WS.Faction.Name'}}">
+        <a data-action="removeRow"><i class="fa-solid fa-xmark"></i></a>
+      </header>
+      <div class="influence"><span>{{localize "WS.Faction.Influence"}}</span>
+        {{> "systems/dyke-pole/templates/parts/pips.hbs" pips=pips path=(concat "system.factions." i ".influence") cls="influence"}}</div>
+      <label><span>{{localize "WS.Faction.Drive"}}</span><input type="text" name="system.factions.{{i}}.drive" value="{{drive}}"></label>
+      <label><span>{{localize "WS.Faction.People"}}</span><input type="text" name="system.factions.{{i}}.people" value="{{people}}"></label>
+      <label><span>{{localize "WS.Faction.Resource"}}</span><input type="text" name="system.factions.{{i}}.resource" value="{{resource}}"></label>
+      <label><span>{{localize "WS.Faction.Aspect"}}</span><input type="text" name="system.factions.{{i}}.aspect" value="{{aspect}}"></label>
+    </article>
+    {{else}}<p class="empty">{{localize "WS.Faction.None"}}</p>{{/each}}
+  </div>
+  <p class="ws-note">{{localize "WS.Faction.Rule"}}</p>
+</section>

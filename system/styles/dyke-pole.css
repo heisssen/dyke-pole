@@ -1,0 +1,285 @@
+/* «Дике Поле» — the look of the rulebook: parchment pages, olive-gold frame, dark ink, teal callouts, feather bullets. */
+@font-face { font-family: "WSHead"; src: url("../assets/fonts/Kurale-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "WSBody"; src: url("../assets/fonts/PT_Serif-Web-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "WSBody"; src: url("../assets/fonts/PT_Serif-Web-Bold.ttf"); font-weight: bold; font-display: swap; }
+@font-face { font-family: "WSBody"; src: url("../assets/fonts/PT_Serif-Web-Italic.ttf"); font-style: italic; font-display: swap; }
+@font-face { font-family: "WSScript"; src: url("../assets/fonts/MarckScript-Regular.ttf"); font-display: swap; }
+
+.dyke-pole, .ws-card {
+  --ws-paper: #ece2cb;
+  --ws-paper-2: #e3d6b6;
+  --ws-ink: #2b2519;
+  --ws-ink-soft: #5a4f3a;
+  --ws-olive: #8a7a2e;
+  --ws-olive-dark: #5d5118;
+  --ws-gold: #b39a3b;
+  --ws-teal: #bcd3d6;
+  --ws-teal-ink: #2c4a50;
+  --ws-steppe: #5e7d34;
+  --ws-ruin: #5b2c4f;
+  --ws-blood: #8e2a1f;
+  --ws-line: rgba(43, 37, 25, .28);
+}
+
+/* ---------- windows ---------- */
+.application.dyke-pole { max-height: calc(100vh - 20px); max-width: calc(100vw - 20px); }
+.application.dyke-pole .window-header {
+  background: var(--ws-olive-dark) url("../assets/ui/paper-dark.webp"); color: #f3ead2;
+  border-bottom: 3px solid var(--ws-gold); font-family: "WSHead", serif;
+}
+.application.dyke-pole .window-header .header-control { color: #f3ead2; }
+.application.dyke-pole .window-title { font-family: "WSHead", serif; font-size: 1.05rem; letter-spacing: .02em; }
+.application.dyke-pole .window-content {
+  background: var(--ws-paper) url("../assets/ui/paper.webp"); color: var(--ws-ink);
+  font-family: "WSBody", serif; font-size: 14px; padding: 0; overflow: hidden;
+  box-shadow: inset 0 0 0 6px var(--ws-gold), inset 0 0 0 7px var(--ws-olive-dark), inset 0 0 40px rgba(90, 70, 20, .25);
+  display: flex; flex-direction: column;
+}
+.dyke-pole .window-content > * { flex-shrink: 0; }
+.dyke-pole .window-content > .tab, .dyke-pole .ws-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 10px 20px 18px; }
+.dyke-pole .window-content > .tab:not(.active) { display: none; }
+
+.dyke-pole input[type=text], .dyke-pole input[type=number], .dyke-pole select, .dyke-pole textarea {
+  background: rgba(255, 252, 240, .55); border: none; border-bottom: 1px solid var(--ws-line); border-radius: 2px;
+  color: var(--ws-ink); font-family: "WSBody", serif; font-size: 14px;
+}
+.dyke-pole input:focus, .dyke-pole textarea:focus, .dyke-pole select:focus { outline: none; background: rgba(255, 252, 240, .9); box-shadow: 0 1px 0 var(--ws-olive); }
+.dyke-pole textarea { width: 100%; border: 1px solid var(--ws-line); resize: vertical; }
+.dyke-pole button:not(.header-control) {
+  font-family: "WSHead", serif; background: var(--ws-paper-2); color: var(--ws-ink);
+  border: 1px solid var(--ws-olive); border-radius: 3px; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .35);
+}
+.dyke-pole button:not(.header-control):hover { background: var(--ws-gold); color: #fff; }
+.dyke-pole a[data-action] { cursor: pointer; color: var(--ws-olive-dark); }
+.dyke-pole a[data-action]:hover { color: var(--ws-blood); text-shadow: none; }
+.dyke-pole label.checkbox { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+/* nav tabs, like chapter tabs */
+.dyke-pole nav.tabs { border: none; margin: 0 20px; padding-top: 4px; gap: 2px; justify-content: flex-start; }
+.dyke-pole nav.tabs > a, .dyke-pole nav.tabs > [data-tab] {
+  font-family: "WSHead", serif; color: var(--ws-ink-soft); padding: 4px 12px; border: 1px solid transparent; border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+.dyke-pole nav.tabs > .active { color: var(--ws-ink); background: rgba(255, 252, 240, .6); border-color: var(--ws-gold); text-shadow: none; }
+
+/* headings — centred small caps title with a hand-written echo, as in the book */
+.dyke-pole .ws-h {
+  font-family: "WSHead", serif; font-weight: normal; font-size: 1.25rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ws-ink); border: none; margin: 16px 0 6px; padding-bottom: 3px; display: flex; align-items: center; gap: 8px;
+  background: linear-gradient(90deg, var(--ws-gold), transparent) bottom / 100% 1px no-repeat;
+}
+.dyke-pole .ws-h a { font-size: .85rem; }
+.dyke-pole .ws-h .count { font-family: "WSBody", serif; font-size: .8rem; letter-spacing: 0; text-transform: none; color: var(--ws-ink-soft); margin-left: auto; }
+.dyke-pole .count.over { color: var(--ws-blood); font-weight: bold; }
+.dyke-pole .ws-note {
+  background: var(--ws-teal); color: var(--ws-teal-ink); border-left: 3px solid var(--ws-teal-ink);
+  font-style: italic; font-size: 12.5px; padding: 6px 10px; margin: 8px 0; border-radius: 2px;
+}
+.dyke-pole .empty { color: var(--ws-ink-soft); font-style: italic; list-style: none; }
+.dyke-pole .hint { color: var(--ws-ink-soft); font-style: italic; }
+.dyke-pole .ws-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.dyke-pole .ws-link { display: inline-block; margin-top: 6px; font-family: "WSHead", serif; }
+
+/* ---------- header ---------- */
+.dyke-pole .ws-head { display: flex; gap: 14px; padding: 16px 20px 6px; align-items: flex-start; }
+.dyke-pole .ws-head .portrait {
+  width: 104px; height: 104px; object-fit: cover; border: 2px solid var(--ws-olive-dark); outline: 3px solid var(--ws-gold);
+  outline-offset: 2px; background: var(--ws-paper-2); cursor: pointer; flex: 0 0 auto;
+}
+.dyke-pole .ws-head .portrait.small { width: 64px; height: 64px; }
+.dyke-pole .ws-head-main { flex: 1; min-width: 0; }
+.dyke-pole .ws-name {
+  font-family: "WSScript", cursive !important; font-size: 2.1rem !important; height: auto !important; width: 100%;
+  background: transparent !important; border: none !important; border-bottom: 1px solid var(--ws-gold) !important; color: var(--ws-ink) !important;
+}
+.dyke-pole .ws-identity { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 10px; margin-top: 6px; }
+.dyke-pole .ws-identity label { display: flex; flex-direction: column; font-size: 11px; color: var(--ws-ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+.dyke-pole .ws-identity label.wide { grid-column: span 2; }
+.dyke-pole .ws-identity input, .dyke-pole .ws-identity select { text-transform: none; letter-spacing: 0; }
+.dyke-pole .ws-head-rolls { display: flex; flex-direction: column; gap: 4px; }
+.dyke-pole .ws-head-rolls button { white-space: nowrap; font-size: 13px; padding: 2px 10px; }
+.dyke-pole .ws-head-rolls .active { font-family: "WSHead", serif; color: var(--ws-blood); text-align: center; }
+
+/* ---------- pips (the book's circles) ---------- */
+.dyke-pole .ws-pips { display: inline-flex; gap: 3px; flex-wrap: wrap; }
+.dyke-pole .pip {
+  display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--ws-ink);
+  background: rgba(255, 252, 240, .6); cursor: pointer; flex: 0 0 auto;
+}
+.dyke-pole .pip.on { background: radial-gradient(circle at 35% 35%, #4a4128, var(--ws-ink)); }
+.dyke-pole .pip.dmg.on { background: repeating-linear-gradient(45deg, var(--ws-blood) 0 2px, transparent 2px 4px), rgba(255, 252, 240, .6); border-color: var(--ws-blood); }
+.dyke-pole .pip.steppe.on, .dyke-pole .ws-counter.steppe .pip.on { background: var(--ws-steppe); border-color: var(--ws-steppe); }
+.dyke-pole .pip.ruin.on, .dyke-pole .ws-counter.ruin .pip.on { background: var(--ws-ruin); border-color: var(--ws-ruin); }
+.dyke-pole .ws-counter .pip.level { border-radius: 2px; transform: rotate(45deg) scale(.85); }
+.dyke-pole .pip.critical { border-color: var(--ws-blood); border-width: 2px; }
+.dyke-pole .pip.influence.on { background: var(--ws-olive); border-color: var(--ws-olive-dark); }
+.dyke-pole .pip:hover { box-shadow: 0 0 0 2px var(--ws-gold); }
+
+/* ---------- stats ---------- */
+.dyke-pole .ws-stats { list-style: none; margin: 0; padding: 0; }
+.dyke-pole .ws-stats li { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 6px; padding: 3px 2px; border-bottom: 1px dotted var(--ws-line); }
+.dyke-pole .ws-stats li:hover { background: rgba(179, 154, 59, .12); }
+.dyke-pole .ws-stats .label { font-family: "WSHead", serif; font-size: 15px; }
+.dyke-pole .ws-stats .roll { color: var(--ws-olive); }
+.dyke-pole .ws-stats li.zero .label { color: var(--ws-blood); }
+
+.dyke-pole .ws-counter { border: 1px solid var(--ws-line); padding: 6px 8px; margin-bottom: 6px; background: rgba(255, 252, 240, .35); }
+.dyke-pole .ws-counter .top { display: flex; align-items: center; gap: 8px; }
+.dyke-pole .ws-counter .label { font-family: "WSHead", serif; font-size: 16px; }
+.dyke-pole .ws-counter.steppe .label { color: var(--ws-steppe); }
+.dyke-pole .ws-counter.ruin .label { color: var(--ws-ruin); }
+.dyke-pole .ws-counter .lvl { font-size: 12px; color: var(--ws-ink-soft); margin-left: auto; }
+.dyke-pole .ws-counter .rows { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+
+/* ---------- rows (drives, bonds, cargo) ---------- */
+.dyke-pole .ws-rows { list-style: none; margin: 0; padding: 0; }
+.dyke-pole .ws-rows li { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
+.dyke-pole .ws-rows li input[type=text] { flex: 1; }
+.dyke-pole .ws-rows li input.tags { flex: 0 0 30%; font-style: italic; }
+.dyke-pole .ws-rows .bullet { color: var(--ws-olive); width: 16px; text-align: center; }
+.dyke-pole .ws-rows li.closed input[type=text] { text-decoration: line-through; color: var(--ws-ink-soft); }
+
+/* ---------- aspects (cards with a track, like the book's blocks) ---------- */
+.dyke-pole .ws-aspects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.dyke-pole .ws-aspect {
+  background: rgba(255, 252, 240, .55); border: 1px solid var(--ws-olive); border-top: 3px solid var(--ws-olive);
+  padding: 6px 10px 8px; position: relative;
+}
+.dyke-pole .ws-aspect.boon { border-top-color: var(--ws-steppe); }
+.dyke-pole .ws-aspect.harm { border-top-color: var(--ws-blood); background: rgba(142, 42, 31, .06); }
+.dyke-pole .ws-aspect.broken { opacity: .6; }
+.dyke-pole .ws-aspect.broken .name { text-decoration: line-through; }
+.dyke-pole .ws-aspect header { display: flex; align-items: baseline; gap: 6px; }
+.dyke-pole .ws-aspect .name { font-family: "WSHead", serif; font-size: 16px; color: var(--ws-ink); }
+.dyke-pole .ws-aspect .kind { font-family: "WSScript", cursive; color: var(--ws-ink-soft); font-size: 15px; }
+.dyke-pole .ws-aspect .faction { font-size: 11px; font-style: italic; color: var(--ws-olive-dark); }
+.dyke-pole .ws-aspect .ctl, .dyke-pole .ws-track .ctl, .dyke-pole .ws-res .ctl { margin-left: auto; display: flex; gap: 8px; opacity: .55; }
+.dyke-pole .ws-aspect:hover .ctl, .dyke-pole .ws-track:hover .ctl, .dyke-pole .ws-res:hover .ctl { opacity: 1; }
+.dyke-pole .track { display: flex; gap: 3px; margin: 5px 0; flex-wrap: wrap; }
+.dyke-pole .track.big .pip { width: 20px; height: 20px; }
+.dyke-pole .abilities { margin: 0; padding-left: 20px; list-style: none; }
+.dyke-pole .abilities li { position: relative; margin: 2px 0; font-size: 13px; }
+.dyke-pole .abilities li::before {
+  content: ""; position: absolute; left: -20px; top: 5px; width: 16px; height: 8px;
+  background: url("../assets/ui/feather.svg") no-repeat center / contain;
+}
+.dyke-pole .abilities .adv { color: var(--ws-olive-dark); }
+.dyke-pole .abilities .use { color: var(--ws-blood); font-size: 12px; }
+.dyke-pole .abilities-edit li input[type=text] { flex: 1; }
+
+/* ---------- resources ---------- */
+.dyke-pole .ws-items { list-style: none; margin: 0; padding: 0; }
+.dyke-pole .ws-res { display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px dotted var(--ws-line); }
+.dyke-pole .ws-res img { width: 28px; height: 28px; border: 1px solid var(--ws-olive); background: var(--ws-paper-2); }
+.dyke-pole .ws-res .name { font-family: "WSHead", serif; font-size: 15px; color: var(--ws-ink); }
+.dyke-pole .ws-res.steppeShard .name { color: var(--ws-steppe); }
+.dyke-pole .ws-res.ruinShard .name { color: var(--ws-ruin); }
+.dyke-pole .tag, .ws-card .tag {
+  display: inline-block; font-size: 11px; padding: 0 6px; border: 1px solid var(--ws-olive); border-radius: 8px;
+  color: var(--ws-olive-dark); background: rgba(255, 252, 240, .6); font-style: italic;
+}
+.dyke-pole .tag.bad, .ws-card .tag.bad { border-color: var(--ws-blood); color: var(--ws-blood); }
+
+/* ---------- projects ---------- */
+.dyke-pole .ws-projects { list-style: none; margin: 0; padding: 0; }
+.dyke-pole .ws-projects li { padding: 6px 0; border-bottom: 1px dotted var(--ws-line); }
+.dyke-pole .ws-projects .row1 { display: flex; gap: 6px; align-items: center; margin-bottom: 4px; }
+.dyke-pole .ws-projects .row1 input[type=text] { flex: 1; font-family: "WSHead", serif; }
+.dyke-pole .ws-projects .len { width: 3.5em; }
+
+/* ---------- camp ---------- */
+.dyke-pole .ws-danger { display: flex; gap: 4px; flex-wrap: wrap; margin: 4px 0; }
+.dyke-pole .ws-danger .pip { width: 18px; height: 18px; }
+.dyke-pole .ws-danger .pip.on { background: linear-gradient(180deg, var(--ws-olive), var(--ws-blood)); border-color: var(--ws-blood); }
+.dyke-pole .ws-factions { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.dyke-pole .ws-faction { background: rgba(255, 252, 240, .5); border: 1px solid var(--ws-olive); padding: 6px 10px; }
+.dyke-pole .ws-faction header { display: flex; gap: 6px; }
+.dyke-pole .ws-faction .fname { font-family: "WSHead", serif; font-size: 17px; flex: 1; }
+.dyke-pole .ws-faction label { display: grid; grid-template-columns: 9em 1fr; align-items: center; gap: 6px; font-size: 12px; color: var(--ws-ink-soft); margin: 2px 0; }
+.dyke-pole .ws-faction .influence { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-family: "WSHead", serif; }
+
+/* ---------- threat ---------- */
+.dyke-pole .ws-field { display: block; margin: 8px 0; }
+.dyke-pole .ws-field > span { display: block; font-family: "WSHead", serif; text-transform: uppercase; font-size: 12px; letter-spacing: .06em; color: var(--ws-ink-soft); }
+.dyke-pole .ws-field input { width: 100%; }
+.dyke-pole .ws-total { display: flex; gap: 10px; align-items: center; margin-top: 8px; font-family: "WSHead", serif; }
+.dyke-pole.ws-threat .ws-head .portrait { outline-color: var(--ws-blood); }
+.dyke-pole .ws-threat-body { padding: 0 20px 18px; }
+.dyke-pole .ws-threat-body .ws-head { padding-left: 0; padding-right: 0; }
+.dyke-pole .ws-scroll .ws-head { padding-left: 0; padding-right: 0; }
+.dyke-pole .ws-identity .val { font-family: "WSHead", serif; font-size: 18px; color: var(--ws-ink); }
+
+/* prose */
+.dyke-pole prose-mirror { background: rgba(255, 252, 240, .5); min-height: 120px; display: block; border: 1px solid var(--ws-line); }
+
+/* ---------- dialogs ---------- */
+.dyke-pole.ws-dialog .window-content { padding: 14px 20px; }
+.dyke-pole .ws-roll-form fieldset { border: 1px solid var(--ws-olive); padding: 4px 10px 8px; margin: 6px 0; display: flex; flex-direction: column; gap: 3px; }
+.dyke-pole .ws-roll-form legend { font-family: "WSHead", serif; padding: 0 4px; }
+.dyke-pole .ws-roll-form .use { color: var(--ws-blood); }
+.dyke-pole .ws-roll-form .form-group label { font-family: "WSHead", serif; }
+
+/* ---------- tracks panel ---------- */
+.dyke-pole.ws-tracks .ws-scroll { padding: 12px 18px; }
+.dyke-pole .ws-panel-camp { border: 1px solid var(--ws-olive); background: rgba(255, 252, 240, .5); padding: 6px 10px; }
+.dyke-pole .ws-panel-camp header a { display: flex; align-items: center; gap: 8px; font-family: "WSScript", cursive; font-size: 22px; color: var(--ws-ink); }
+.dyke-pole .ws-panel-camp header img { width: 32px; height: 32px; border: 1px solid var(--ws-olive); }
+.dyke-pole .ws-panel-camp .label { font-family: "WSHead", serif; display: flex; gap: 6px; }
+.dyke-pole .ws-panel-camp button { width: 100%; margin-top: 4px; }
+.dyke-pole .ws-track { border: 1px solid var(--ws-line); background: rgba(255, 252, 240, .45); padding: 6px 10px; margin-bottom: 8px; }
+.dyke-pole .ws-track header { display: flex; gap: 6px; align-items: baseline; }
+.dyke-pole .ws-track .name { font-family: "WSHead", serif; font-size: 15px; }
+.dyke-pole .ws-track .count { font-size: 12px; color: var(--ws-ink-soft); }
+.dyke-pole .ws-track.secret { border-style: dashed; }
+.dyke-pole .ws-track.done { border-color: var(--ws-gold); box-shadow: inset 0 0 0 1px var(--ws-gold); }
+.dyke-pole .ws-track .ws-pips .pip { width: 18px; height: 18px; }
+.dyke-pole .ws-track.journey .periods { list-style: none; margin: 6px 0; padding: 0; }
+.dyke-pole .ws-track.journey .periods li { display: flex; gap: 8px; align-items: center; padding: 2px 0; }
+.dyke-pole .ws-track.journey .phrase { font-family: "WSScript", cursive; font-size: 17px; }
+.dyke-pole .ws-track.journey button { width: 100%; }
+.dyke-pole .ws-track .final { font-family: "WSHead", serif; color: var(--ws-blood); margin: 4px 0 0; }
+
+/* ---------- chat cards ---------- */
+.chat-message .ws-card {
+  background: #ece2cb url("../assets/ui/paper.webp"); color: #2b2519; border: 1px solid #8a7a2e; box-shadow: inset 0 0 0 2px rgba(179, 154, 59, .5);
+  font-family: "WSBody", serif; padding: 0; overflow: hidden;
+}
+.chat-message .ws-card header {
+  background: #5d5118 url("../assets/ui/paper-dark.webp"); color: #f3ead2; font-family: "WSHead", serif; padding: 4px 8px;
+  display: flex; gap: 6px; align-items: center;
+}
+.chat-message .ws-card header img { width: 22px; height: 22px; border: none; }
+.chat-message .ws-card header .skill { margin-left: auto; font-family: "WSScript", cursive; font-size: 18px; color: #f0dc8a; }
+.chat-message .ws-card .ws-body { padding: 6px 8px; }
+.chat-message .ws-card blockquote { font-family: "WSScript", cursive; font-size: 18px; margin: 4px 0; border: none; padding: 0; }
+.chat-message .ws-dice { display: flex; gap: 5px; justify-content: center; padding: 8px 6px 2px; flex-wrap: wrap; }
+.chat-message .ws-dice .die {
+  width: 30px; height: 30px; display: grid; place-items: center; font-family: "WSHead", serif; font-size: 18px;
+  background: #fbf6e6; border: 1.5px solid #2b2519; border-radius: 6px; box-shadow: 1px 2px 0 rgba(43, 37, 25, .35);
+}
+.chat-message .ws-dice .die.top { background: #2b2519; color: #f3ead2; }
+.chat-message .ws-dice .die.cut { opacity: .4; text-decoration: line-through; transform: rotate(-8deg); }
+.chat-message .ws-dice .die.twin { outline: 2px solid #b39a3b; outline-offset: 1px; }
+.chat-message .ws-mods { display: flex; gap: 8px; justify-content: center; font-size: 11px; color: #5a4f3a; font-style: italic; }
+.chat-message .ws-sources { font-size: 11px; margin: 2px 10px; padding-left: 14px; color: #5a4f3a; }
+.chat-message .ws-result { text-align: center; padding: 4px 8px 6px; }
+.chat-message .ws-result strong { display: block; font-family: "WSHead", serif; font-size: 22px; text-transform: uppercase; letter-spacing: .08em; }
+.chat-message .ws-roll.ws-triumph .ws-result strong { color: #5e7d34; }
+.chat-message .ws-roll.ws-conflict .ws-result strong { color: #8a6a1a; }
+.chat-message .ws-roll.ws-disaster .ws-result strong { color: #8e2a1f; }
+.chat-message .ws-twist { background: #bcd3d6; color: #2c4a50; margin: 0 8px 6px; padding: 4px 8px; font-size: 12.5px; border-left: 3px solid #2c4a50; }
+.chat-message .ws-twist.positive { border-left-color: #5e7d34; }
+.chat-message .ws-twist.negative { border-left-color: #8e2a1f; }
+.chat-message .ws-impact { text-align: center; font-size: 12px; color: #5a4f3a; padding-bottom: 6px; }
+.chat-message .ws-apply { display: block; width: calc(100% - 16px); margin: 0 8px 8px; font-family: "WSHead", serif; background: #e3d6b6; border: 1px solid #8a7a2e; color: #2b2519; }
+.chat-message .ws-apply:hover:not([disabled]) { background: #b39a3b; color: #fff; }
+.chat-message .ws-apply.done, .chat-message .ws-apply[disabled] { opacity: .5; }
+.chat-message .ws-card.ws-ruin header { background: #5b2c4f; }
+.chat-message .ws-card.ws-steppe header { background: #5e7d34; }
+.chat-message .ws-card.ws-danger header { background: #8e2a1f; }
+.chat-message .ws-card .critical { color: #8e2a1f; font-weight: bold; }
+.chat-message .ws-card ul { margin: 4px 0; padding-left: 18px; }
+
+@media (max-width: 700px) { .dyke-pole .ws-columns, .dyke-pole .ws-identity { grid-template-columns: 1fr; } }
+.dyke-pole .form-group > label, .dyke-pole .form-group label { color: var(--ws-ink); }
+.dyke-pole .form-group .hint, .dyke-pole .ws-roll-form .hint { color: var(--ws-ink-soft); }

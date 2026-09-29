@@ -1,0 +1,16 @@
+<header class="ws-head">
+  <img class="portrait" src="{{actor.img}}" data-action="editImage" data-edit="img" alt="">
+  <div class="ws-head-main">
+    <input class="ws-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'WS.Sheet.Name'}}">
+    <div class="ws-identity">
+      <label><span>{{localize "WS.Sheet.Origin"}}</span><input type="text" name="system.origin" value="{{system.origin}}" placeholder="{{localize 'WS.Sheet.OriginHint'}}"></label>
+      <label><span>{{localize "WS.Sheet.Background"}}</span><input type="text" name="system.background" value="{{system.background}}" placeholder="{{localize 'WS.Sheet.BackgroundHint'}}"></label>
+      <label><span>{{localize "WS.Sheet.Role"}}</span><input type="text" name="system.role" value="{{system.role}}" placeholder="{{localize 'WS.Sheet.RoleHint'}}"></label>
+    </div>
+  </div>
+  <div class="ws-head-rolls">
+    <button type="button" data-action="roll" data-mode="action"><i class="fa-solid fa-dice"></i> {{localize "WS.Roll.Mode.action"}}</button>
+    <button type="button" data-action="roll" data-mode="reaction"><i class="fa-solid fa-shield-halved"></i> {{localize "WS.Roll.Mode.reaction"}}</button>
+    <button type="button" data-action="roll" data-mode="task"><i class="fa-solid fa-hammer"></i> {{localize "WS.Roll.Mode.task"}}</button>
+  </div>
+</header>

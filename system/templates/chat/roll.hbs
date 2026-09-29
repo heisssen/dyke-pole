@@ -1,0 +1,22 @@
+<div class="ws-card ws-roll ws-{{result}}">
+  <header>
+    <span class="what">{{modeLabel}}{{#if task}}: {{task}}{{/if}}</span>
+    {{#if label}}<span class="skill">{{label}}</span>{{/if}}
+  </header>
+  <div class="ws-dice">
+    {{#each dice}}<span class="die {{#if cut}}cut{{/if}} {{#if top}}top{{/if}} {{#if twin}}twin{{/if}}">{{face}}</span>{{/each}}
+  </div>
+  {{#if (or desperate cuts advantages)}}<div class="ws-mods">
+    {{#if desperate}}<span>{{localize "WS.Roll.Desperate"}}</span>{{/if}}
+    {{#if advantages}}<span>+{{advantages}} {{localize "WS.Roll.AdvShort"}}</span>{{/if}}
+    {{#if cuts}}<span>−{{cuts}} {{localize "WS.Roll.CutShort"}}</span>{{/if}}
+  </div>{{/if}}
+  {{#if sources.length}}<ul class="ws-sources">{{#each sources}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
+  <div class="ws-result"><strong>{{resultLabel}}</strong><span>{{outcome}}</span></div>
+  {{#if twist}}<div class="ws-twist {{tone}}"><i class="fa-solid fa-wind"></i> <strong>{{localize "WS.Result.twist"}}</strong>
+    {{#if tone}}<em>({{localize (concat "WS.Twist." tone)}})</em>{{/if}} — {{twistText}}</div>{{/if}}
+  {{#if impact}}<div class="ws-impact">{{localize "WS.Roll.Impact"}}: {{impact}} · {{localize "WS.Roll.Marks"}}: <strong>{{marksLabel}}</strong></div>{{/if}}
+  {{#if target}}{{#if marks}}
+  <button type="button" class="ws-apply" data-ws-apply><i class="fa-solid fa-circle-dot"></i> {{localize "WS.Roll.Apply" }} — {{target.name}}</button>
+  {{/if}}{{/if}}
+</div>
