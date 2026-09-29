@@ -4,7 +4,10 @@
     <header><a data-action="openCamp"><img src="{{camp.img}}" alt=""> {{camp.name}}</a></header>
     <div class="label">{{localize "WS.Camp.Danger"}} <span class="count {{#if critical}}over{{/if}}">{{dangerValue}}/10</span></div>
     <div class="ws-danger">{{#each danger}}<a class="pip {{#if on}}on{{/if}} {{#if critical}}critical{{/if}}" data-action="danger" data-n="{{n}}"></a>{{/each}}</div>
-    <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "WS.Rest.Button"}}</button>
+    <div class="ws-rest-btns">
+      <button type="button" data-action="startRest"><i class="fa-solid fa-fire"></i> {{localize "WS.Rest.Start"}}</button>
+      <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "WS.Rest.Button"}}</button>
+    </div>
   </section>
   {{else}}<p class="ws-note">{{localize "WS.Tracks.NoCamp"}}</p>{{/if}}
 

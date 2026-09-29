@@ -10,6 +10,11 @@ import { TracksPanel } from "./module/apps/tracks.mjs";
 import { ID, registerSettings, initSocket, getState, op } from "./module/state.mjs";
 import { rollDialog, doRoll, onRenderChatMessage } from "./module/roll.mjs";
 import * as rules from "./module/rules.mjs";
+import { registerConfig } from "./module/config.mjs";
+import { characterWizard, campWizard, quickNpc } from "./module/apps/creation.mjs";
+import { aspectBuilder } from "./module/apps/aspect-builder.mjs";
+import { takeDamage } from "./module/outcomes.mjs";
+import { registerDiceSoNice } from "./module/dice-so-nice.mjs";
 
 export const DEFAULT_IMG = {
   Actor: { character: "icons/svg/mystery-man.svg", camp: "icons/environment/settlement/wagon.webp", threat: "icons/creatures/unholy/demon-fanged-horned-yellow.webp" },
@@ -41,8 +46,11 @@ Hooks.once("init", () => {
   Items.registerSheet(ID, ResourceSheet, { types: ["resource"], makeDefault: true, label: "WS.SheetName.resource" });
 
   registerSettings();
+  registerConfig();
+  registerDiceSoNice();
+  document.fonts?.load("64px WSHead");
   foundry.applications.handlebars.loadTemplates([`systems/${ID}/templates/parts/pips.hbs`]);
-  game.dykePole = { rules, roll: rollDialog, doRoll, tracks: () => TracksPanel.toggle(), state: getState, op };
+  game.dykePole = { rules, roll: rollDialog, doRoll, tracks: () => TracksPanel.toggle(), state: getState, op, characterWizard, campWizard, quickNpc, aspectBuilder, takeDamage };
 });
 
 Hooks.once("ready", () => initSocket());
@@ -74,4 +82,25 @@ Hooks.on("getSceneControlButtons", controls => {
     name: "wsTracks", title: "WS.Tracks.Title", icon: "fa-solid fa-circle-dot", order: 60, button: true,
     onChange: () => TracksPanel.toggle()
   };
+});
+
+/* Creation buttons on top of the Actors tab. */
+Hooks.on("renderActorDirectory", (app, html) => {
+  const root = html instanceof HTMLElement ? html : html[0];
+  if (!root || root.querySelector(".ws-dir-buttons")) return;
+  const bar = document.createElement("div");
+  bar.className = "ws-dir-buttons";
+  const btn = (icon, label, fn) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = `<i class="fa-solid ${icon}"></i> ${game.i18n.localize(label)}`;
+    b.addEventListener("click", fn);
+    bar.appendChild(b);
+  };
+  btn("fa-user-plus", "WS.Wizard.CharButton", () => characterWizard());
+  if (game.user.isGM) {
+    btn("fa-caravan", "WS.Wizard.CampButton", () => campWizard());
+    btn("fa-user-secret", "WS.Npc.Button", () => quickNpc());
+  }
+  (root.querySelector(".directory-header") ?? root).prepend(bar);
 });

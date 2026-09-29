@@ -283,3 +283,38 @@
 @media (max-width: 700px) { .dyke-pole .ws-columns, .dyke-pole .ws-identity { grid-template-columns: 1fr; } }
 .dyke-pole .form-group > label, .dyke-pole .form-group label { color: var(--ws-ink); }
 .dyke-pole .form-group .hint, .dyke-pole .ws-roll-form .hint { color: var(--ws-ink-soft); }
+
+/* ---------- builder & wizards ---------- */
+.dyke-pole .ws-build-head { display: flex; justify-content: space-between; font-family: "WSHead", serif; font-size: 16px; margin: 6px 0; }
+.dyke-pole .ws-build-total { font-size: 22px; color: var(--ws-steppe); }
+.dyke-pole .ws-build-total.bad { color: var(--ws-blood); }
+.dyke-pole .ws-build-row { display: grid; grid-template-columns: minmax(0, 1.6fr) auto minmax(0, 1.5fr) auto 2.4em 1.2em; gap: 6px; align-items: center; margin: 3px 0; }
+.dyke-pole .ws-build-row input[name=custom] { width: 3.2em; }
+.dyke-pole .ws-build-row input[name=custom][hidden] { display: none; }
+.dyke-pole .ws-build-row .cost { font-family: "WSHead", serif; color: var(--ws-blood); text-align: right; }
+.dyke-pole .ws-builder-form > button { margin: 4px 0; }
+.dyke-pole .ws-columns.three { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.dyke-pole .ws-columns.four { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.dyke-pole .ws-wizard-form > input[type=text] { width: 100%; margin: 2px 0; }
+.dyke-pole .ws-wiz-stat { display: grid; grid-template-columns: 1fr 3.5em; align-items: center; gap: 6px; padding: 2px 0; border-bottom: 1px dotted var(--ws-line); font-family: "WSHead", serif; }
+.dyke-pole .ws-choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.dyke-pole .ws-choice { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--ws-olive); background: rgba(255, 252, 240, .5); padding: 6px 8px; cursor: pointer; }
+.dyke-pole .ws-choice:has(input:checked) { border-color: var(--ws-olive-dark); box-shadow: inset 0 0 0 2px var(--ws-gold); background: rgba(255, 252, 240, .85); }
+.dyke-pole .ws-choice:has(input:disabled:not(:checked)) { opacity: .5; }
+.dyke-pole .ws-choice b { font-family: "WSHead", serif; font-size: 15px; }
+.dyke-pole .ws-choice small { color: var(--ws-ink-soft); font-size: 12px; }
+.dyke-pole .ws-choice .asp { font-size: 12px; margin-top: 3px; border-top: 1px dotted var(--ws-line); padding-top: 3px; }
+.dyke-pole .ws-type-look { font-family: "WSScript", cursive; font-size: 18px; margin: 4px 0; }
+.dyke-pole .ws-type-notes { font-size: 12.5px; margin: 0 0 4px; }
+.dyke-pole .ws-pregens { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.dyke-pole .ws-pregen { display: flex; gap: 8px; align-items: center; border: 1px solid var(--ws-olive); padding: 6px; cursor: pointer; background: rgba(255, 252, 240, .5); }
+.dyke-pole .ws-pregen:has(input:checked) { box-shadow: inset 0 0 0 2px var(--ws-gold); }
+.dyke-pole .ws-pregen input { display: none; }
+.dyke-pole .ws-pregen img { width: 48px; height: 48px; border: 1px solid var(--ws-olive); object-fit: cover; }
+.dyke-pole .ws-pregen span { display: flex; flex-direction: column; }
+.dyke-pole .ws-pregen b { font-family: "WSHead", serif; font-size: 16px; }
+.dyke-pole .ws-pregen small { color: var(--ws-ink-soft); }
+.dyke-pole .ws-rest-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.ws-dir-buttons { display: flex; gap: 4px; flex-wrap: wrap; padding: 4px 0; }
+.ws-dir-buttons button { flex: 1; font-size: 12px; white-space: nowrap; }
+.chat-message .ws-flavor { margin: 0 8px 6px; padding: 4px 8px; font-style: italic; font-size: 12.5px; border-left: 3px solid #8a7a2e; background: rgba(255, 252, 240, .6); }

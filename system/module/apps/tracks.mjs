@@ -20,7 +20,7 @@ export class TracksPanel extends HandlebarsApplicationMixin(ApplicationV2) {
     position: { width: 380, height: 620, top: 80, left: 120 },
     actions: {
       add: TracksPanel.#add, journey: TracksPanel.#journey, period: TracksPanel.#period, remove: TracksPanel.#remove,
-      edit: TracksPanel.#edit, pip: TracksPanel.#pip, danger: TracksPanel.#danger, rest: TracksPanel.#rest, openCamp: TracksPanel.#openCamp
+      edit: TracksPanel.#edit, pip: TracksPanel.#pip, danger: TracksPanel.#danger, rest: TracksPanel.#rest, startRest: TracksPanel.#startRest, openCamp: TracksPanel.#openCamp
     }
   };
   static PARTS = { body: { template: `systems/${ID}/templates/apps/tracks.hbs`, scrollable: [".ws-scroll"] } };
@@ -129,6 +129,15 @@ export class TracksPanel extends HandlebarsApplicationMixin(ApplicationV2) {
     const next = Math.min(LIMITS.danger, camp.system.danger + 1);
     await camp.update({ "system.danger": next });
     await card(L("WS.Rest.Period", { n: next }), dangerCritical(next) ? `<p class="critical">${L("WS.Rest.Critical")}</p>` : L("WS.Rest.Hint"), { icon: "fa-campground", kind: dangerCritical(next) ? "danger" : "rest" });
+  }
+  /** Setting up camp (p.67): danger = previous (or 4) + the local Steppe/Ruin activity. */
+  static async #startRest() {
+    const activity = await DialogV2.prompt({
+      window: { title: "WS.Rest.Start", icon: "fa-solid fa-fire" }, classes: ["dyke-pole", "ws-dialog"],
+      content: `<div class="form-group"><label>${L("WS.Rest.Activity")}</label><input type="number" name="a" value="0" min="0" max="6"></div><p class="hint">${L("WS.Rest.ActivityHint")}</p>`,
+      ok: { label: "WS.Rest.Start", callback: (ev, b) => b.form.elements.a.value }, rejectClose: false
+    });
+    if (activity !== null && activity !== undefined) return op("startRest", { activity: Number(activity) });
   }
   static #openCamp() { fromUuidSync(getState().camp)?.sheet.render({ force: true }); }
 }

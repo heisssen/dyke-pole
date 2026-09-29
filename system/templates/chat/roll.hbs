@@ -13,9 +13,12 @@
   </div>{{/if}}
   {{#if sources.length}}<ul class="ws-sources">{{#each sources}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
   <div class="ws-result"><strong>{{resultLabel}}</strong><span>{{outcome}}</span></div>
+  {{#if flavor}}<div class="ws-flavor"><i class="fa-solid fa-compass"></i> {{flavor}}</div>{{/if}}
   {{#if twist}}<div class="ws-twist {{tone}}"><i class="fa-solid fa-wind"></i> <strong>{{localize "WS.Result.twist"}}</strong>
     {{#if tone}}<em>({{localize (concat "WS.Twist." tone)}})</em>{{/if}} — {{twistText}}</div>{{/if}}
   {{#if impact}}<div class="ws-impact">{{localize "WS.Roll.Impact"}}: {{impact}} · {{localize "WS.Roll.Marks"}}: <strong>{{marksLabel}}</strong></div>{{/if}}
+  {{#if canDamage}}<button type="button" class="ws-apply" data-ws-damage><i class="fa-solid fa-droplet"></i> {{localize "WS.Damage.Button"}}</button>{{/if}}
+  {{#if canTask}}<button type="button" class="ws-apply" data-ws-task><i class="fa-solid fa-sack"></i> {{localize "WS.Task.Button"}}</button>{{/if}}
   {{#if target}}{{#if marks}}
   <button type="button" class="ws-apply" data-ws-apply><i class="fa-solid fa-circle-dot"></i> {{localize "WS.Roll.Apply" }} — {{target.name}}</button>
   {{/if}}{{/if}}

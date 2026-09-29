@@ -1,0 +1,30 @@
+<div class="ws-wizard-form">
+  <div class="form-group"><label>{{localize "WS.Sheet.Name"}}</label><input type="text" name="name" autofocus></div>
+  <div class="ws-columns three">
+    <label class="ws-field"><span>{{localize "WS.Sheet.Origin"}}</span><input type="text" name="origin" list="ws-origins" placeholder="{{localize 'WS.Sheet.OriginHint'}}"></label>
+    <label class="ws-field"><span>{{localize "WS.Sheet.Background"}}</span><input type="text" name="background" list="ws-backgrounds" placeholder="{{localize 'WS.Sheet.BackgroundHint'}}"></label>
+    <label class="ws-field"><span>{{localize "WS.Sheet.Role"}}</span><input type="text" name="role" list="ws-roles" placeholder="{{localize 'WS.Sheet.RoleHint'}}"></label>
+  </div>
+  <datalist id="ws-origins">{{#each origins}}<option value="{{this}}">{{/each}}</datalist>
+  <datalist id="ws-backgrounds">{{#each backgrounds}}<option value="{{this}}">{{/each}}</datalist>
+  <datalist id="ws-roles">{{#each roles}}<option value="{{this}}">{{/each}}</datalist>
+  <p class="hint">{{localize "WS.Wizard.IdentityHint"}}</p>
+
+  <h2 class="ws-h">{{localize "WS.Sheet.Drives"}}</h2>
+  <input type="text" name="drive1" placeholder="{{localize 'WS.Drive.Placeholder'}}">
+  <input type="text" name="drive2" placeholder="{{localize 'WS.Drive.Placeholder'}}">
+  <input type="text" name="drive3" placeholder="{{localize 'WS.Drive.Placeholder'}}">
+
+  <div class="ws-columns">
+    <div>
+      <h2 class="ws-h">{{localize "WS.Sheet.Skills"}} <span class="count"><span class="sum-skills">0</span></span></h2>
+      {{#each skills}}<div class="ws-wiz-stat" data-tooltip="{{hint}}"><span>{{label}}</span><input type="number" name="skills.{{key}}" value="0" min="0" max="3"></div>{{/each}}
+    </div>
+    <div>
+      <h2 class="ws-h">{{localize "WS.Sheet.Knowledges"}} <span class="count"><span class="sum-know">0</span></span></h2>
+      {{#each knowledges}}<div class="ws-wiz-stat" data-tooltip="{{hint}}"><span>{{label}}</span><input type="number" name="knowledges.{{key}}" value="0" min="0" max="3"></div>{{/each}}
+      <p class="ws-note">{{localize "WS.Wizard.StatsHint"}}</p>
+      <label class="checkbox"><input type="checkbox" name="firstAspect" checked> {{localize "WS.Wizard.FirstAspect"}}</label>
+    </div>
+  </div>
+</div>

@@ -108,6 +108,37 @@ const OPS = {
   },
   async setCamp(s, d) { s.camp = d.uuid ?? ""; },
 
+  /** Players usually can't create actors: the GM creates the character and hands it over. */
+  async createActor(s, d, { user }) {
+    const data = foundry.utils.deepClone(d.data);
+    data.ownership = { default: CONST.DOCUMENT_OWNERSHIP_LEVELS[d.shared ? "OWNER" : "OBSERVER"] };
+    if (user && !user.isGM) data.ownership[user.id] = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+    const a = await Actor.create(data);
+    if (user && !user.isGM && !user.character && a.type === "character") await user.update({ character: a.id });
+    if (a.type === "camp" && (d.activate || !s.camp)) s.camp = a.uuid;
+    return a.uuid;
+  },
+
+  /** Take a copy of a compendium actor (a pregen) into the world for this user. */
+  async importActor(s, d, { user }) {
+    const src = await fromUuid(d.uuid);
+    if (!src) return false;
+    const data = game.actors.fromCompendium(src);
+    if (d.name) data.name = d.name;
+    return OPS.createActor(s, { data, shared: src.type === "camp" }, { user });
+  },
+
+  /** A rest begins (p.67): danger starts at its previous value (or 4) plus the local activity. */
+  async startRest(s, d) {
+    const camp = s.camp ? fromUuidSync(s.camp) : null;
+    if (!camp) return false;
+    const fresh = camp.getFlag(ID, "rested") ? camp.system.danger : LIMITS.dangerStart;
+    const v = Math.min(LIMITS.danger, fresh + (Number(d.activity) || 0));
+    await camp.update({ "system.danger": v, [`flags.${ID}.rested`]: true });
+    await card(L("WS.Rest.FirstFire"), L("WS.Rest.FirstFireHint", { n: v }), { icon: "fa-fire", kind: "rest" });
+    return false;
+  },
+
   /** Put marks from a roll on a target (card button). */
   async mark(s, d, { user }) {
     const marks = d.marks === "all" ? "all" : Number(d.marks) || 0;

@@ -4,6 +4,7 @@
  */
 import { SKILLS, KNOWLEDGES, RATINGS, IMPACTS, LIMITS, resolve, poolSize, trackMarks, twistTone } from "./rules.mjs";
 import { ID, L, esc, op, getState, describeTarget } from "./state.mjs";
+import { takeDamage, taskOutcome } from "./outcomes.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
@@ -107,6 +108,9 @@ export async function doRoll(actor, o) {
     twist: r.twist, twistText: r.twist ? L(`${outcomeKey}.twist`) : "", tone: game.settings.get(ID, "twistTable") ? twistTone(r.twistValue) : null,
     desperate, cuts: r.cut.length, advantages, impact: mode === "action" || mode === "rating" ? L(`WS.Impact.${o.impact || "medium"}`) : "",
     marks, marksLabel: marks === "all" ? L("WS.Tracks.All") : marks, target, targetId: o.target || "",
+    flavor: mode === "luck" ? CONFIG.DYKE_POLE?.luckEvents?.[key] ?? "" : "",
+    canDamage: mode === "reaction" && r.result !== "triumph",
+    canTask: mode === "task" && (r.result !== "disaster" || o.task === "craftGear"),
     sources: checked.map(id => {
       const [itemId, n2] = id.split(".");
       const it = actor.items.get(itemId);
@@ -114,20 +118,32 @@ export async function doRoll(actor, o) {
     }).filter(Boolean)
   };
   const content = await renderTemplate(`systems/${ID}/templates/chat/roll.hbs`, ctx);
-  await roll.toMessage({ speaker: ChatMessage.getSpeaker({ actor }), content, flags: { [ID]: { roll: { marks, target: o.target || "", result: r.result } } } }, { rollMode: game.settings.get("core", "rollMode") });
+  await roll.toMessage({ speaker: ChatMessage.getSpeaker({ actor }), content, flags: { [ID]: { roll: { marks, target: o.target || "", result: r.result, mode, task: o.task ?? "", twist: r.twist, actor: actor.uuid } } } }, { rollMode: game.settings.get("core", "rollMode") });
   // Using a shard raises the matching counter (p.28) — the control roll is only rolled when in doubt, so it doesn't.
   return { ...r, marks };
 }
 
-/** Chat card buttons. */
+/** Chat card buttons: marks on a track, damage from a reaction, a task's result. */
 export function onRenderChatMessage(message, html) {
+  const f = message.getFlag(ID, "roll");
+  if (!f) return;
   html.querySelectorAll?.("[data-ws-apply]").forEach(btn => {
-    const f = message.getFlag(ID, "roll");
-    if (!f?.target || f.applied) { btn.disabled = true; if (f?.applied) btn.classList.add("done"); return; }
+    if (!f.target || f.applied) { btn.disabled = true; if (f.applied) btn.classList.add("done"); return; }
     btn.addEventListener("click", async () => {
       btn.disabled = true;
       await op("mark", { target: f.target, marks: f.marks });
       if (message.isOwner) await message.setFlag(ID, "roll", { ...f, applied: true });
+    });
+  });
+  const actor = f.actor ? fromUuidSync(f.actor) : null;
+  html.querySelectorAll?.("[data-ws-damage], [data-ws-task]").forEach(btn => {
+    if (!actor?.isOwner) { btn.remove(); return; }
+    if (f.done) { btn.disabled = true; btn.classList.add("done"); return; }
+    btn.addEventListener("click", async () => {
+      const done = btn.dataset.wsDamage !== undefined
+        ? await takeDamage(actor, { suggested: f.result === "disaster" ? 3 : 1 })
+        : await taskOutcome(actor, f);
+      if (done && message.isOwner) await message.setFlag(ID, "roll", { ...f, done: true });
     });
   });
 }

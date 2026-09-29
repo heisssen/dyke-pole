@@ -1,0 +1,47 @@
+<div class="ws-wizard-form">
+  <div class="ws-columns">
+    <div class="form-group"><label>{{localize "WS.Camp.Kind"}}</label>
+      <select name="type">{{#each types}}<option value="{{id}}">{{name}}</option>{{/each}}<option value="">{{localize "WS.Wizard.CustomType"}}</option></select></div>
+    <div class="form-group"><label>{{localize "WS.Camp.Name"}}</label><input type="text" name="name"></div>
+  </div>
+  <div class="form-group"><label>{{localize "WS.Camp.Drive"}}</label><input type="text" name="drive"></div>
+  <div class="form-group"><label>{{localize "WS.Wizard.Length"}}</label>
+    <select name="gameLength">
+      <option value="1">{{localize "WS.Wizard.Oneshot"}}</option>
+      <option value="2" selected>{{localize "WS.Wizard.Short"}}</option>
+      <option value="3">{{localize "WS.Wizard.Long"}}</option>
+    </select></div>
+
+  <div class="custom-type">
+    <div class="form-group"><label>{{localize "WS.Camp.Kind"}}</label><input type="text" name="kind"></div>
+    <p class="hint">{{localize "WS.Wizard.CustomBonus"}}</p>
+    <div class="ws-columns four">{{#each ratings}}<label class="ws-wiz-stat"><span>{{label}}</span><input type="number" name="bonus.{{key}}" value="0" min="0" max="1"></label>{{/each}}</div>
+  </div>
+
+  {{#each types}}
+  <section data-type="{{id}}" hidden>
+    <p class="ws-type-look"><em>{{look}}</em></p>
+    <p><b>{{localize "WS.Camp.Ratings"}}:</b> {{ratingText}}</p>
+    {{#if notes.length}}<ul class="ws-type-notes">{{#each notes}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
+    <h2 class="ws-h">{{localize "WS.Tab.Factions"}}</h2>
+    <div class="ws-choice-grid">
+      {{#each factions}}
+      <label class="ws-choice"><input type="checkbox" name="faction-{{../id}}-{{@index}}" data-faction>
+        <b>{{name}}</b><small>{{drive}}</small><small><i>{{people}}</i> · {{resource}}</small>
+        {{#if aspect}}<span class="asp">{{aspect.name}}{{#each aspect.abilities}}<br>— {{#if advantage}}(п) {{/if}}{{text}}{{/each}}</span>{{/if}}
+      </label>
+      {{/each}}
+    </div>
+    <h2 class="ws-h">{{localize "WS.Wizard.TypeAspects"}}</h2>
+    <div class="ws-choice-grid">
+      {{#each aspects}}
+      <label class="ws-choice"><input type="checkbox" name="aspect-{{../id}}-{{@index}}" data-aspect>
+        <b>{{name}}</b>{{#each abilities}}<small>— {{#if advantage}}(п) {{/if}}{{text}}</small>{{/each}}
+      </label>
+      {{/each}}
+    </div>
+  </section>
+  {{/each}}
+  <p class="ws-note ws-camp-count"></p>
+  <p class="hint">{{localize "WS.Wizard.CampRule"}}</p>
+</div>

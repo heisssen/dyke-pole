@@ -1,13 +1,14 @@
 <section class="tab ws-tab {{tab.cssClass}}" data-tab="aspects" data-group="primary">
   <h2 class="ws-h">{{localize "WS.Sheet.Aspects"}}
-    {{#if editable}}<a data-action="createItem" data-type="aspect" data-kind="permanent"><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
+    {{#if editable}}<a data-action="build" data-tooltip="{{localize 'WS.Build.Title'}}"><i class="fa-solid fa-compass-drafting"></i></a>
+    <a data-action="createItem" data-type="aspect" data-kind="permanent" data-tooltip="{{localize 'WS.New.permanent'}}"><i class="fa-solid fa-plus"></i></a>{{/if}}</h2>
   <div class="ws-aspects">
     {{#each aspects}}
     <article class="ws-aspect {{#if broken}}broken{{/if}}" data-item-id="{{id}}" data-drag-item>
       <header>
         <a class="name" data-action="editItem">{{name}}</a>
         {{#if controlledBy}}<span class="faction" data-tooltip="{{localize 'WS.Aspect.ControlledBy'}}">{{controlledBy}}</span>{{/if}}
-        <span class="ctl"><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span>
+        <span class="ctl"><a data-action="develop" data-tooltip="{{localize 'WS.Develop.Tip'}}"><i class="fa-solid fa-seedling"></i></a><a data-action="postItem"><i class="fa-solid fa-comment"></i></a><a data-action="deleteItem"><i class="fa-solid fa-trash"></i></a></span>
       </header>
       <div class="track">{{#each pips}}<a class="pip dmg {{#if on}}on{{/if}}" data-action="itemPip" data-n="{{n}}"></a>{{/each}}</div>
       <ul class="abilities">{{#each abilities}}<li>{{#if advantage}}<b class="adv">(п)</b> {{/if}}{{text}}{{#if use}} <em class="use">{{localize "WS.Aspect.Use"}}</em>{{/if}}</li>{{/each}}</ul>

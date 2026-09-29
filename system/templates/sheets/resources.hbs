@@ -1,7 +1,9 @@
 <section class="tab ws-tab {{tab.cssClass}}" data-tab="resources" data-group="primary">
   {{#each resourceGroups}}
   <h2 class="ws-h">{{label}} <span class="count {{#if over}}over{{/if}}">{{count}}/{{limit}}</span>
-    {{#if ../editable}}<a data-action="createItem" data-type="resource" data-kind="{{kind}}"><i class="fa-solid fa-plus"></i></a>
+    {{#if ../editable}}{{#if table}}<a data-action="randomResource" data-kind="{{kind}}" data-tooltip="{{localize 'WS.Resource.Random'}}"><i class="fa-solid fa-dice"></i></a>{{/if}}
+    {{#if altTable}}<a data-action="randomResource" data-kind="{{alt}}" data-tooltip="{{localize 'WS.Resource.RandomRuin'}}"><i class="fa-solid fa-dice-d6"></i></a>{{/if}}
+    <a data-action="createItem" data-type="resource" data-kind="{{kind}}"><i class="fa-solid fa-plus"></i></a>
     {{#if alt}}<a data-action="createItem" data-type="resource" data-kind="{{alt}}" data-tooltip="{{localize 'WS.Resource.ruinShard'}}"><i class="fa-solid fa-skull"></i></a>{{/if}}{{/if}}</h2>
   <ul class="ws-items">
     {{#each items}}

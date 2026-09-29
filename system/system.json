@@ -2,7 +2,7 @@
   "id": "dyke-pole",
   "title": "Дике Поле",
   "description": "Система для настільної рольової гри «Дике Поле» (рушій Wild Words) у Foundry VTT v14: аркуші персонажа, табору й загроз, збір кісток зі зрізами, впливом і твістами, спільні треки подорожі та лічильник небезпеки.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -92,7 +92,7 @@
   "license": "LICENSE",
   "url": "https://github.com/heisssen/dyke-pole",
   "manifest": "https://github.com/heisssen/dyke-pole/releases/latest/download/system.json",
-  "download": "https://github.com/heisssen/dyke-pole/releases/download/v0.1.0/dyke-pole-0.1.0.zip",
+  "download": "https://github.com/heisssen/dyke-pole/releases/download/v0.2.0/dyke-pole-0.2.0.zip",
   "bugs": "https://github.com/heisssen/dyke-pole/issues",
   "readme": "https://github.com/heisssen/dyke-pole/blob/main/README.md"
 }

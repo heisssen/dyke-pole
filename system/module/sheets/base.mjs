@@ -1,6 +1,8 @@
 /** Shared sheet behaviour: clickable pip tracks, editable row lists, embedded aspects/resources, rolls. */
 import { ID, L } from "../state.mjs";
 import { rollDialog } from "../roll.mjs";
+import { aspectBuilder, developAspect } from "../apps/aspect-builder.mjs";
+import { takeDamage } from "../outcomes.mjs";
 import { LIMITS } from "../rules.mjs";
 
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
@@ -36,7 +38,8 @@ export class BaseActorSheet extends HandlebarsApplicationMixin(foundry.applicati
     actions: {
       pip: BaseActorSheet.#pip, addRow: BaseActorSheet.#addRow, removeRow: BaseActorSheet.#removeRow,
       createItem: BaseActorSheet.#createItem, editItem: BaseActorSheet.#editItem, deleteItem: BaseActorSheet.#deleteItem,
-      itemPip: BaseActorSheet.#itemPip, roll: BaseActorSheet.#roll, postItem: BaseActorSheet.#postItem
+      itemPip: BaseActorSheet.#itemPip, roll: BaseActorSheet.#roll, postItem: BaseActorSheet.#postItem,
+      build: BaseActorSheet.#build, develop: BaseActorSheet.#develop, damage: BaseActorSheet.#damage
     }
   };
 
@@ -124,6 +127,9 @@ export class BaseActorSheet extends HandlebarsApplicationMixin(foundry.applicati
     const n = Number(t.dataset.n);
     await item.update({ "system.damage": item.system.damage === n ? n - 1 : n });
   }
+  static #build() { return aspectBuilder(this.actor); }
+  static #develop(ev, t) { return developAspect(this.actor, this.actor.items.get(t.closest("[data-item-id]").dataset.itemId)); }
+  static #damage() { return takeDamage(this.actor); }
   static #roll(ev, t) { return rollDialog(this.actor, { mode: t.dataset.mode, key: t.dataset.key, task: t.dataset.task }); }
   static async #postItem(ev, t) {
     const item = this.actor.items.get(t.closest("[data-item-id]").dataset.itemId);

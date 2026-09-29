@@ -9,7 +9,7 @@ export class CharacterSheet extends BaseActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["ws-character"],
     position: { width: 760, height: 860 },
-    actions: { counterPip: CharacterSheet.#counterPip, counterMark: CharacterSheet.#counterMark, driveSatisfy: CharacterSheet.#driveSatisfy, project: CharacterSheet.#project }
+    actions: { randomResource: CharacterSheet.#randomResource, counterPip: CharacterSheet.#counterPip, counterMark: CharacterSheet.#counterMark, driveSatisfy: CharacterSheet.#driveSatisfy, project: CharacterSheet.#project }
   };
   static PARTS = {
     header: { template: T("character-header") },
@@ -54,10 +54,21 @@ export class CharacterSheet extends BaseActorSheet {
         { kind: "gear", label: L("WS.Resource.gear"), limit: RESOURCE_KINDS.gear.limit, items: res.filter(i => i.system.kind === "gear") },
         { kind: "steppeShard", alt: "ruinShard", label: L("WS.Resource.shards"), limit: shardLimit, items: shards },
         { kind: "map", label: L("WS.Resource.map"), limit: RESOURCE_KINDS.map.limit, items: res.filter(i => i.system.kind === "map") }
-      ].map(g => ({ ...g, count: g.items.length, over: g.items.length > g.limit, items: g.items.map(i => ({ id: i.id, name: i.name, img: i.img, kind: i.system.kind, tags: i.system.tags, qty: i.system.quantity })) })),
+      ].map(g => ({ ...g, table: !!CONFIG.DYKE_POLE.randomTables?.[g.kind], altTable: !!(g.alt && CONFIG.DYKE_POLE.randomTables?.[g.alt]), count: g.items.length, over: g.items.length > g.limit, items: g.items.map(i => ({ id: i.id, name: i.name, img: i.img, kind: i.system.kind, tags: i.system.tags, qty: i.system.quantity })) })),
       canBond: s.bonds.length < LIMITS.bonds, canProject: s.projects.length < LIMITS.projects, canDrive: s.drives.length < 3,
       projectKinds: ["skill", "knowledge", "aspect", "custom"].map(k => ({ value: k, label: `WS.Project.${k}` }))
     });
+  }
+
+  /** Draw from the book's random table for this resource kind and put the result on the sheet. */
+  static async #randomResource(ev, t) {
+    const kind = t.dataset.kind;
+    const table = await fromUuid(CONFIG.DYKE_POLE.randomTables?.[kind] ?? "");
+    if (!table) return;
+    const draw = await table.draw({ displayChat: true });
+    const r = draw.results[0];
+    const name = r?.name || r?.description || r?.text;
+    if (name) await this.actor.createEmbeddedDocuments("Item", [{ type: "resource", name, system: { kind, tags: /лікувальн/i.test(name) ? [{ text: "лікувальний", good: true }] : [] } }]);
   }
 
   /** Clicking the counter track: filling the 3rd box rolls over into the next level (on the GM). */

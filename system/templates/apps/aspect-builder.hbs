@@ -1,0 +1,28 @@
+<div class="ws-builder-form">
+  {{#unless modify}}
+  <div class="form-group"><label>{{localize "WS.Build.Name"}}</label><input type="text" name="name" value="{{name}}" autofocus></div>
+  {{else}}
+  <ul class="abilities">{{#each existing}}<li>{{#if advantage}}<b class="adv">(п)</b> {{/if}}{{text}}{{#if use}} <em class="use">{{localize "WS.Aspect.Use"}}</em>{{/if}}</li>{{/each}}</ul>
+  {{/unless}}
+  <div class="ws-build-head">
+    <span>{{localize "WS.Build.Base"}} <b>{{base}}</b></span>
+    <span class="res">{{localize "WS.Build.Length"}} <b class="ws-build-total">{{base}}</b></span>
+  </div>
+  <div class="ws-build-rows">
+    {{#each rows}}
+    <div class="ws-build-row">
+      <select name="type">
+        <option value="">{{localize "WS.Build.Pick"}}</option>
+        {{#each ../groups}}<optgroup label="{{label}}">{{#each options}}<option value="{{id}}">{{label}} ({{cost}}{{#if use}}, {{localize "WS.Aspect.Use"}}{{/if}})</option>{{/each}}</optgroup>{{/each}}
+      </select>
+      <input type="number" name="custom" value="1" min="0" max="7" hidden>
+      <input type="text" name="text" placeholder="{{localize 'WS.Build.TextHint'}}">
+      <label class="checkbox" data-tooltip="{{localize 'WS.Build.AddUseTip'}}"><input type="checkbox" name="addUse"> {{localize "WS.Aspect.Use"}}</label>
+      <span class="cost"></span>
+      <a data-remove-row><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    {{/each}}
+  </div>
+  <button type="button" data-add-row><i class="fa-solid fa-plus"></i> {{localize "WS.Build.AddAbility"}}</button>
+  <p class="ws-note">{{localize "WS.Build.Rule"}}</p>
+</div>
